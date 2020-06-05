@@ -1,0 +1,13 @@
+.socialContainer{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.socialImage{
+    margin: 5px 15px 0 5px;
+    width: 20px;
+}
+.followp{
+    font-size: 10px;
+}

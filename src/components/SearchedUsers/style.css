@@ -1,0 +1,51 @@
+#searchedUsers{
+    display: flex;
+    flex-direction: row;
+    border-radius: 2%;
+    justify-content: space-between;
+    margin-top: 2px;
+    margin-bottom: 10px;
+    background-color: rgb(246, 246, 246);
+    padding-left: 2px;
+    width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+#searchUserFollowStatus{
+   margin-right: 15px;
+}
+#searchUserFollowStatus span{
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+#searchUserFollowStatus span:hover{
+    cursor: pointer;
+    color: lightskyblue;
+}
+#searchUserImgInfo{
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+}
+
+#searchedUsers img{
+    width: 45px;
+    height: 45px;
+ border-radius: 50%;
+}
+#searchUserInfo{
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 0 2px;
+    text-align: start;
+    font-size: 15px;
+    font-family: 'Baloo Bhaina 2';
+    font-weight: 600;
+    color: rgb(49, 49, 49);
+}
+#searchUserInfo:hover{
+    cursor: pointer;
+}
+#searchUserInfo span:hover{
+    color: lightskyblue;
+}
+

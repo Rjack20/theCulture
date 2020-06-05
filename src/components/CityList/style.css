@@ -1,0 +1,348 @@
+#cityList{
+position: relative;
+padding: 20px 95px 20px 95px;
+box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+
+
+}
+
+#cityListImgOne img{
+    width: 100%;
+    height: auto;
+    
+}
+
+#cityListItemOneArist p{
+    position: absolute;
+    background-color: tomato;
+    padding: 2px;
+    color: white;
+    top: 1%;
+    transform: translate(-50% -50%);
+    margin-left: 15px;
+    font-size: 2vw;
+}
+#cityListItemOneRank p{
+    position: absolute;
+    background-color: tomato;
+    padding: 2px;
+    color: white;
+    top: 1.4%;
+    margin-left: 15px;
+    transform: translate(-50% -50%);
+    font-size: 2vw;
+}
+
+
+#cityListImgTwo img{
+    width: 100%;
+    height: auto;
+}
+
+#cityListItemTwoArist p{
+    position: absolute;
+    background-color: tomato;
+    padding: 2px;
+    color: white;    
+    top: 6.5%;
+    margin-left: 15px;
+    transform: translate(-50% -50%);
+    font-size: 2vw;
+}
+#cityListItemTwoRank p{
+    position: absolute;
+    background-color: tomato;
+    padding: 2px;
+    color: white;
+    top: 6.9%;
+    margin-left: 15px;
+    transform: translate(-50% -50%);
+    font-size: 2vw;
+}
+
+
+
+#cityListImgThree img{
+    width: 100%;
+    height: auto;
+}
+
+#cityListItemThreeArist p{
+    position: absolute;
+    background-color: tomato;
+    padding: 2px;
+    color: white;
+    top: 16.5%;
+    margin-left: 15px;
+    transform: translate(-50% -50%);
+    font-size: 2vw;
+}
+#cityListItemThreeRank p{
+    position: absolute;
+    background-color: tomato;
+    padding: 2px;
+    color: white;
+    top: 16.9%;
+    margin-left: 15px;
+    transform: translate(-50% -50%);
+    font-size: 2vw;
+}
+
+
+
+
+#cityListImgFour img{
+    width: 100%;
+    height: auto;
+}
+
+#cityListItemFourArist p{
+    position: absolute;
+    background-color: tomato;
+    padding: 2px;
+    color: white;
+    top: 25%;
+    margin-left: 15px;
+    transform: translate(-50% -50%);
+    font-size: 2vw;
+}
+#cityListItemFourRank p{
+    position: absolute;
+    background-color: tomato;
+    padding: 2px;
+    color: white;
+    top: 25.4%;
+    margin-left: 15px;
+    transform: translate(-50% -50%);
+    font-size: 2vw;
+}
+
+
+
+
+#cityListImgFive img{
+    width: 100%;
+    height: auto;
+}
+
+#cityListItemFiveArist p{
+    position: absolute;
+    background-color: tomato;
+    padding: 2px;
+    color: white;
+    top: 34%;
+    margin-left: 15px;
+    transform: translate(-50% -50%);
+    font-size: 2vw;
+}
+#cityListItemFiveRank p{
+    position: absolute;
+    background-color: tomato;
+    padding: 2px;
+    color: white;
+    top: 34.4%;
+    margin-left: 15px;
+    transform: translate(-50% -50%);
+    font-size: 2vw;
+}
+
+
+
+#cityListImgSix img{
+    width: 100%;
+    height: auto;
+}
+
+#cityListItemSixArist p{
+    position: absolute;
+    background-color: tomato;
+    padding: 2px;
+    color: white;
+    top: 43%;
+    margin-left: 15px;
+    transform: translate(-50% -50%);
+    font-size: 2vw;
+}
+#cityListItemSixRank p{
+    position: absolute;
+    background-color: tomato;
+    padding: 2px;
+    color: white;
+    top: 43.4%;
+    margin-left: 15px;
+    transform: translate(-50% -50%);
+    font-size: 2vw;
+}
+
+#cityListImgSeven img{
+    width: 100%;
+    height: auto;
+}
+
+#cityListItemSevenArist p{
+    position: absolute;
+    background-color: tomato;
+    padding: 2px;
+    color: white;
+    top: 50.5%;
+    margin-left: 15px;
+    transform: translate(-50% -50%);
+    font-size: 2vw;
+}
+#cityListItemSevenRank p{
+    position: absolute;
+    background-color: tomato;
+    padding: 2px;
+    color: white;
+    top: 50.9%;
+    margin-left: 15px;
+    transform: translate(-50% -50%);
+    font-size: 2vw;
+}
+
+
+#cityListImgEight img{
+    width: 100%;
+    height: auto;
+}
+
+#cityListItemEightArist p{
+    position: absolute;
+    background-color: tomato;
+    padding: 2px;
+    color: white;
+    top: 56.5%;
+    margin-left: 15px;
+    transform: translate(-50% -50%);
+    font-size: 2vw;
+}
+#cityListItemEightRank p{
+    position: absolute;
+    background-color: tomato;
+    padding: 2px;
+    color: white;
+    top: 56.9%;
+    margin-left: 15px;
+    transform: translate(-50% -50%);
+    font-size: 2vw;
+}
+
+
+#cityListImgNine img{
+    width: 100%;
+    height: auto;
+}
+
+#cityListItemNineArist p{
+    position: absolute;
+    background-color: tomato;
+    padding: 2px;
+    color: white;
+    top: 64.8%;
+    margin-left: 15px;
+    transform: translate(-50% -50%);
+    font-size: 2vw;
+}
+#cityListItemNineRank p{
+    position: absolute;
+    background-color: tomato;
+    padding: 2px;
+    color: white;
+    top: 65.2%;
+    margin-left: 15px;
+    transform: translate(-50% -50%);
+    font-size: 2vw;
+}
+
+
+#cityListImgTen img{
+    width: 100%;
+    height: auto;
+}
+
+#cityListItemTenArist p{
+    position: absolute;
+    background-color: tomato;
+    padding: 2px;
+    color: white;
+    top: 74.8%;
+    margin-left: 15px;
+    transform: translate(-50% -50%);
+    font-size: 2vw;
+}
+#cityListItemTenRank p{
+    position: absolute;
+    background-color: tomato;
+    padding: 2px;
+    color: white;
+    top: 75.2%;
+    margin-left: 15px;
+    transform: translate(-50% -50%);
+    font-size: 2vw;
+}
+
+
+
+#cityListImgEleven img{
+    width: 100%;
+    height: auto;
+}
+
+#cityListItemElevenArist p{
+    position: absolute;
+    background-color: tomato;
+    padding: 2px;
+    color: white;
+    top: 83.5%;
+    margin-left: 15px;
+    transform: translate(-50% -50%);
+    font-size: 2vw;
+}
+#cityListItemElevenRank p{
+    position: absolute;
+    background-color: tomato;
+    padding: 2px;
+    color: white;
+    top: 83.9%;
+    margin-left: 15px;
+    transform: translate(-50% -50%);
+    font-size: 2vw;
+}
+
+
+#cityListImgTwelve img{
+    width: 100%;
+    height: auto;
+}
+
+#cityListItemTwelveArist p{
+    position: absolute;
+    background-color: tomato;
+    padding: 2px;
+    color: white;
+    top: 91%;
+    margin-left: 15px;
+    transform: translate(-50% -50%);
+    font-size: 2vw;
+}
+#cityListItemTwelveRank p{
+    position: absolute;
+    background-color: tomato;
+    padding: 2px;
+    color: white;
+    top: 91.4%;
+    margin-left: 15px;
+    transform: translate(-50% -50%);
+    font-size: 2vw;
+}
+
+
+
+
+
+
+
+
+
+
+

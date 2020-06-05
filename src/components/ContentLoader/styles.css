@@ -1,0 +1,45 @@
+.content-loader-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 30px;
+    margin-left: 50px;
+}
+
+#c-type-container{
+    
+    width: 30%;
+    margin-bottom: 10px;
+}
+
+#c-title{
+    width: 30%;
+    margin-bottom: 10px;
+}
+
+#c-subtext{
+    width: 30%;
+    margin-bottom: 10px;
+}
+
+
+
+#c-submit-btn{
+    width: 8%;
+    padding: 5px;
+    margin-top: 10px;
+}
+
+#cover-img-container{
+    width: 100px;
+    height: 100px;
+}
+#image-progress{
+    margin-bottom: 15px;
+}
+
+
+#content-body{
+    width: 35%;
+    height: 300px;
+}

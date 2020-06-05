@@ -1,0 +1,46 @@
+#wrapper{
+  padding: 0 20px 0 20px;
+
+}
+
+
+#state-container{
+    margin-right: 2px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+#city-container{
+    margin-left: 2px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    
+}
+
+
+#chartCity{
+    text-align: center;
+    
+}
+#chartCity p{
+    text-align: center;
+    font-size: 24px;
+}
+
+
+#selector-flex-parent{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#selectedCity{
+    text-align: center;
+}
+
+
+
+
+
+
+
+

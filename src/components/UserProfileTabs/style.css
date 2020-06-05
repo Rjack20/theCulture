@@ -1,0 +1,43 @@
+#profileTabs{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+    
+   
+}
+#profilePost{
+    width: 100;
+   
+}
+
+#postTab{
+   
+    overflow: auto;
+    overflow-x: hidden;
+    max-height: 800px;
+    box-shadow: 0 4px 8px 4px rgba(0,0,0,0.2);
+   
+}
+
+#followingTab{
+    overflow: auto;
+    overflow-x: hidden;
+    max-height: 800px;
+    box-shadow: 0 4px 8px 4px rgba(0,0,0,0.2);
+}
+
+#followersTab{
+    overflow: auto;
+    overflow-x: hidden;
+    max-height: 800px;
+    box-shadow: 0 4px 8px 4px rgba(0,0,0,0.2);
+}
+
+
+#tabBox{
+    text-align: center;
+   margin-top: 20px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 4px 8px 4px rgba(0,0,0,0.2);
+}

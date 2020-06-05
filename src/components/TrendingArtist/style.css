@@ -1,0 +1,32 @@
+#trendArtistContainer{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+/*artist info*/
+#trendArtistContainer p{
+    text-transform: uppercase;
+    font-size: 55%;
+    padding: 0 10px 0 10px;
+    box-sizing: border-box;
+    letter-spacing: 2px;
+    font-family: 'Baloo Bhaina 2';
+}
+
+/*artist*/
+#trendArtistContainer span{
+    text-transform: uppercase;
+    font-size: 120%;
+    padding: 0 10px 0 10px;
+    box-sizing: border-box;
+    letter-spacing: 2px;
+  
+}
+
+#trendingArtistImage img{
+    width: 100%;
+    height: auto;
+}
+
+body{
+    background-color: rgb(250, 250, 250);
+}

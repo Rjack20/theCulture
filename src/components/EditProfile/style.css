@@ -1,0 +1,28 @@
+#editProfile{
+   display: flex;
+   flex-direction: column;
+   justify-content: start;
+    text-align: center;
+    align-items: center;
+    margin-top: 20px;
+    min-height: 900px;
+}
+#editProfile span:hover{
+    cursor: pointer;
+    color: rgb(59, 155, 211);
+ }
+
+#editProfile img{
+   border-radius: 50%;
+   width: 250px;
+   height: 250px;
+   object-fit: cover;
+}
+
+#editBtnSubmit{
+    margin-top: 30px;
+}
+
+#cancelEdit{
+    margin: 15px 0 15px 0;
+}

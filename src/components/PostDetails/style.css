@@ -1,0 +1,327 @@
+#postDetails{
+    width: 100%;
+    margin-top: 50px;
+    margin-bottom: 150px;
+    text-align: center;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   border-style: groove;
+   border-width: 2px;
+   border-top-color: palevioletred;
+   
+}
+
+#postDetailsAudio{
+ background-color: rgb(238, 238, 238);
+ box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+ width: 100%;
+}
+
+#infoAndAdd{
+   
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    white-space: nowrap ;
+   
+}
+
+#postDetailsAudioPlayer{
+    
+
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    
+    
+}
+
+#postDetailsAudioPlayer{
+    
+    color: rgb(90, 90, 90);
+    
+    
+    
+}
+
+
+
+
+
+
+
+#postDetailsContent{
+    border-style: groove;
+    border-width: 2px;
+    border-color: rgb(109, 106, 106);
+}
+
+#postDetailsHeader{
+    width: 99%;
+    display: flex;
+    flex-direction: row;
+    padding: 1px;
+    padding-top: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    background-color: rgb(250, 250, 250);
+  
+}
+#postDetailsHeader:hover{
+    cursor: pointer;
+  
+}
+#postDetailsHeaderImg img{
+    width: 50px;
+    border-radius: 50%;
+}
+#postDetailsUserInfo{
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    margin-left: 2px;
+    font-size: 12px;
+    font-family:  'Baloo Bhaina 2';
+    font-weight: 600;
+}
+
+#postDetailsTime{
+    
+   
+    background-color: rgb(250, 250, 250);
+    width: 100%;
+    font-size: 10px;
+    text-align: end;
+}
+#postDetailsTime span{
+    margin-right: 10px;
+    
+}
+
+#postDetailsText{
+    background-color: rgb(250, 250, 250);
+   
+    padding: 3px;
+}
+
+#postDetailsTextValue{
+    text-align: center;
+    white-space: normal;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 15px;
+    
+}
+
+
+
+#postDetailsContentView{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background-color: rgb(10, 10, 10);
+}
+#postDetailsContentView img{
+    width: 65%;
+}
+#postDetailsContentView video{
+    width: 70%;
+    margin-bottom: 2px;
+}
+#postDetailsDescription{
+    background-color: rgb(250, 250, 250);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+
+}
+
+#postDetailsAudioControl{
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(238, 238, 238);
+    width: 65%;
+    justify-content: start;
+}
+
+#postDetailsAudioControl img{
+    width: 50px;
+   border-radius: 50%;
+}
+
+#postDetailsAudioInfo{
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    margin-right: 40px;
+}
+
+#postDetailsAudioInfo p{
+    text-align: start;
+    margin:  0 0 0 0;
+    font-size: 14px;
+}
+
+
+
+#postDetailsAudioPlayer img{  
+    margin: auto;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+}
+#postDetailsAudioPlayer p{  
+  white-space: nowrap;
+  font-size: small;
+}
+
+#postDetailsActions{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+   
+}
+#postDetailsActions span:hover{
+    cursor: pointer;
+   
+}
+
+#postDetailsActionsImg{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    background-color: rgb(250, 250, 250);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 1px;
+    font-size: 11px;
+}
+#postDetailsActionsImg img{
+    width: 20px;
+    height: 20px;
+    margin: 0 10px 0  0;
+}
+#postDetailsActionsImg img:hover{
+    cursor: pointer;
+}
+
+#postDetailsInput{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    background-color: rgb(250, 250, 250);
+    width: 100%;
+    border-top-style: groove;
+    border-top-width: 2px;
+    border-top-color: rgb(255, 255, 255);
+}
+#addComment{
+    width: 99%;
+    text-align: center;
+    padding:  0 2px 5px 5px;
+}
+
+#addComment span:hover{
+    cursor: pointer;
+}
+
+#commentDescriptionUserName{
+    margin-right: 5px;
+    font-family:  'Baloo Bhaina 2';
+    font-weight: 600;
+    padding: 5px;
+}
+#commentDescription{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 15px;
+    padding: 5px;
+}
+
+#commentReady{
+    color: rgb(0, 165, 216);
+}
+#commentEmpty{
+    color: rgb(73, 73, 73);
+}
+
+#commentSection{
+    overflow: auto;
+    overflow-x: hidden;
+    max-height: 400px;
+  
+   
+    
+}
+
+#commentSection:-webkit-scrollbar{
+    width: 1px;
+}
+
+
+#addIcon:hover{
+    cursor: pointer;
+    color: turquoise;
+
+}
+
+
+
+#addIcon:hover  #tooltiptextAddDetails{
+ 
+    visibility: visible;
+}
+
+#tooltiptextAddDetails {
+    position: relative;
+
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    font-size: 15px;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+
+  #rating{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 5px;
+}
+
+
+#rating:hover {
+ 
+    cursor: pointer;
+}
+
+
+
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(251, 64, 64);
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  
+
+

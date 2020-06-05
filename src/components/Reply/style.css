@@ -1,0 +1,29 @@
+#reply{
+    border: rgb(221, 219, 219);
+    border-width: 3px;
+    border-radius: 1%;
+    border-style: groove;
+    width: 100%;
+    background-color: rgb(212, 209, 209);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+#replyInput{
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+
+}
+
+
+#replyReady{
+    color: rgb(0, 165, 216);
+}
+#replyEmpty{
+    color: rgb(73, 73, 73);
+}
+#replyReady:hover{
+    cursor: pointer;
+}
+#replyEmpty:hover{
+    cursor: pointer;
+}

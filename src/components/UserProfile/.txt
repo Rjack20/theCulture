@@ -1,0 +1,1330 @@
+import React, { Component } from 'react'
+import {Grid} from '@material-ui/core'
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Slide from '@material-ui/core/Slide';
+import Media from 'react-media'
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import app from '../../base'
+import AddIcon from '@material-ui/icons/Add';
+import Fab from '@material-ui/core/Fab';
+import {ToastContainer, toast, Zoom, Bounce} from 'react-toastify'
+
+import './style.css'
+import Track from '../Track';
+import UserProfileTabs from '../UserProfileTabs';
+
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+  });
+
+  function TabPanel(props) {
+    const { children, value, index, ...other } = props;
+  
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+      >
+        {value === index && (
+          <Box p={3}>
+            <Typography>{children}</Typography>
+          </Box>
+        )}
+      </div>
+    );
+  }
+
+
+
+
+export default class UserProfile extends Component {
+    constructor(props){
+        super(props)
+
+        this.addPost = this.addPost.bind(this)
+        this.trackRef = app.database().ref().child('Tracks')
+        this.playlistRef = app.database().ref().child('Playlist')
+        this.postRef = app.database().ref().child('Post')
+        this.albumRef = app.database().ref().child('Albums')
+        this.userRef = app.database().ref().child('Users')
+        this.cityRef = app.database().ref().child('CityUsers')
+        this.getUserPlaylist = this.getUserPlaylist.bind(this)
+        this.getUserAudioPost = this.getUserAudioPost.bind(this)
+        this.removeTrack = this.removeTrack.bind(this)
+        this.removeSong = this.removeSong.bind(this)
+        this.handleUserInput = this.handleUserInput.bind(this)
+        this.handleTabsChange  = this.handleTabsChange.bind(this)
+        this.getIndex  = this.getIndex.bind(this)
+        this.openCollection = this.openCollection.bind(this)
+        this.handleClick = this.handleClick.bind(this)
+        this.handleChange  = this.handleChange.bind(this)
+        this.handlePlaylistChange = this.handlePlaylistChange.bind(this)
+        this.handleClose = this.handleClose.bind(this)
+        this.noInputToast = this.noInputToast.bind(this)
+        this.checkRankStatus = this.checkRankStatus.bind(this)
+        this.videoAndPhotoToastError = this.videoAndPhotoToastError.bind(this)
+        this.albumandMixtape = this.albumandMixtape.bind(this)
+        this.noTitle = this.noTitle.bind(this)
+        
+       
+
+        this.user = null
+        this.city = null
+        this.currentUser = app.auth().currentUser
+        this.id = null
+
+        this.state ={
+            tracks:[],
+            playlist:[],
+            albums: [],
+            name: null,
+            profileImage: null,
+            label: '',
+            value: 0,
+            city: null,
+            sortAlbums: false,
+            sortTitle: false,
+            sortedAlbums: null,
+            sortedTitles: null,
+            sorted: false,
+
+            sortAlbumsPlaylist: false,
+            sortTitlePlaylist: false,
+            sortedAlbumsPlaylist: null,
+            sortedTitlesPlaylist: null,
+            sortedPlaylist: false,
+            currentSong: null,
+            music: 'stopped',
+            currentTime: null,
+            duration: null,
+            
+            cityList: [],
+            finalCityList: [],
+            userRank: '',
+
+
+            open: false,
+            trackDeleted: false,
+            user: null,
+            currentUserName: null,
+            currentUserId: null,
+            paramsId: null,
+            searchField: '',
+            searchedUsers: [],
+            followList:[],
+            finalSearchedUsers:{},
+            loading: true,
+            deletedPostOpen: false,
+            postLiked: false,
+            imageUri: '',
+            imageUrl: '',
+            audioUri: '',
+            audioUrl: '',
+            videoUri: '',
+            videoUrl: '',
+            description: '',
+            text: '',
+            coverArtUri: '',
+            coverArt: '',
+            title: '',
+            artist: '',
+            album: '',
+            mixtape: '',
+            imageProgress: 0,
+            audioProgress: 0,
+            videoProgress: 0,
+            postList: []
+        }
+    }
+
+
+    noInputToast(){
+        toast("Can't create an empty post.", {
+            className: 'custom-toast',
+            draggable: true,
+            position: toast.POSITION.BOTTOM_CENTER
+        })
+    }
+    
+     albumandMixtape(){
+        toast("Error: Album and Mixtape cant both have values", {
+            className: 'custom-toast',
+            draggable: true,
+            position: toast.POSITION.BOTTOM_CENTER
+        })
+    }
+     noTitle(){
+        toast("Title must be filled", {
+            className: 'custom-toast',
+            draggable: true,
+            position: toast.POSITION.BOTTOM_CENTER
+        })
+    }
+    
+    videoAndPhotoToastError(){
+        toast("Error: Cant load image and video at the same time", {
+            className: 'custom-toast',
+            draggable: true,
+            position: toast.POSITION.BOTTOM_CENTER
+        })
+    }
+    
+    
+     noArtistToast(){
+        toast("Missing a artist name", {
+            className: 'custom-toast',
+            draggable: true,
+            position: toast.POSITION.BOTTOM_CENTER
+        })
+    }
+
+    
+    addPost(){
+        var id = app.auth().currentUser.uid
+        if(this.state.text === '' && this.state.description === '' && this.state.imageUrl === '' && this.state.coverArt === '' && this.state.audioUrl === '' && this.state.artist === '' && this.state.title === '' && this.state.album === '' && this.state.mixtape === ''){
+            this.noInputToast()
+           return
+          }
+          if(this.state.audioUrl && !this.state.artist){
+            this.noArtistToast()
+           return
+          }
+          if(this.state.album && this.state.mixtape){
+              this.albumandMixtape()
+              return
+          }
+    
+          if(this.state.audioUrl && !this.state.title){
+              this.noTitle()
+              return
+          }
+          if(this.state.imageUrl && this.state.videoUrl){
+            this.videoAndPhotoToastError()
+            return
+        }
+
+
+
+          if(this.state.text){
+            var postRef = app.database().ref('Post').child(id).child('post')
+            let post = {}
+            post['userId'] = id;
+            post['text'] = this.state.text;
+            post['description'] = this.state.description;
+            post['photo'] = this.state.imageUrl;
+            post['audio'] = this.state.audioUrl;
+            post['video'] = this.state.videoUrl;
+            post['coverArt'] = this.state.coverArt;
+            post['title'] = this.state.title;
+            post['artist'] = this.state.artist;
+            post['album'] = this.state.album;
+            post['mixtape'] = this.state.mixtape;
+            post['timePosted'] = Date.now();
+  
+          postRef.push(post).then(()=>{
+             this.setState({
+                imageUri: '',
+                imageUrl: '',
+                audioUri: '',
+                audioUrl: '',
+                postLiked: false,
+                videoUri: '',
+                videoUrl: '',
+                description: '',
+                text: '',
+                coverArtUri: '',
+                coverArt: '',
+                title: '',
+                artist: '',
+                album: '',
+                mixtape: '',
+                imageProgress: 0,
+                audioProgress: 0,
+             })
+              this.setState({
+              open: false
+          })})
+        
+          }
+          if(this.state.audioUrl){
+            var postRef = app.database().ref('Post').child(id).child('post')
+            let post = {}
+            post['userId'] = id;
+            post['text'] = this.state.text;
+            post['description'] = this.state.description;
+            post['photo'] = this.state.imageUrl;
+            post['audio'] = this.state.audioUrl;
+            post['video'] = this.state.videoUrl;
+            post['coverArt'] = this.state.coverArt;
+            post['title'] = this.state.title;
+            post['artist'] = this.state.artist;
+            post['album'] = this.state.album;
+            post['mixtape'] = this.state.mixtape;
+            post['timePosted'] = Date.now();
+        
+    
+          postRef.push(post).then(()=>{
+            this.setState({
+                imageUri: '',
+                imageUrl: '',
+                postLiked: false,
+                audioUri: '',
+                audioUrl: '',
+                videoUri: '',
+                videoUrl: '',
+                description: '',
+                text: '',
+                coverArtUri: '',
+                coverArt: '',
+                title: '',
+                artist: '',
+                album: '',
+                mixtape: '',
+                imageProgress: 0,
+                audioProgress: 0,
+            })
+              this.setState({
+            open: false
+        })})
+        }
+        if(this.state.videoUrl){
+            var postRef = app.database().ref('Post').child(id).child('post')
+            let post = {}
+          post['userId'] = id;
+          post['text'] = this.state.text;
+          post['description'] = this.state.description;
+          post['photo'] = this.state.imageUrl;
+          post['audio'] = this.state.audioUrl;
+          post['video'] = this.state.videoUrl;
+          post['coverArt'] = this.state.coverArt;
+          post['title'] = this.state.title;
+          post['artist'] = this.state.artist;
+          post['album'] = this.state.album;
+          post['mixtape'] = this.state.mixtape;
+          post['timePosted'] = Date.now();
+        
+    
+          postRef.push(post).then(()=>{
+            this.setState({
+                imageUri: '',
+                imageUrl: '',
+                audioUri: '',
+                audioUrl: '',
+                postLiked: false,
+                videoUri: '',
+                videoUrl: '',
+                description: '',
+                text: '',
+                coverArtUri: '',
+                coverArt: '',
+                title: '',
+                artist: '',
+                album: '',
+                mixtape: '',
+                imageProgress: 0,
+                audioProgress: 0,
+            })
+              this.setState({
+            open: false
+        })})
+        }
+        if(this.state.imageUrl){
+            var postRef = app.database().ref('Post').child(id).child('post')
+            let post = {}
+            post['userId'] = id;
+            post['text'] = this.state.text;
+            post['description'] = this.state.description;
+            post['photo'] = this.state.imageUrl;
+            post['audio'] = this.state.audioUrl;
+            post['video'] = this.state.videoUrl;
+            post['coverArt'] = this.state.coverArt;
+            post['title'] = this.state.title;
+            post['artist'] = this.state.artist;
+            post['album'] = this.state.album;
+            post['mixtape'] = this.state.mixtape;
+            post['timePosted'] = Date.now();
+        
+    
+          postRef.push(post).then(()=>{
+            this.setState({
+                imageUri: '',
+                imageUrl: '',
+                audioUri: '',
+                audioUrl: '',
+                postLiked: false,
+                videoUri: '',
+                videoUrl: '',
+                description: '',
+                text: '',
+                coverArtUri: '',
+                coverArt: '',
+                title: '',
+                artist: '',
+                album: '',
+                mixtape: '',
+                imageProgress: 0,
+                audioProgress: 0,
+            })
+              this.setState({
+            open: false
+        })})
+          
+        }
+
+      }
+
+
+   
+    openCollection =(album)=>{
+
+        if(!this.state.open){
+            this.setState({
+                open: true
+            })
+            console.log(album)
+            
+        }else{
+            this.setState({
+                open: false
+            })
+            console.log(album + " " + 'closed')
+        }
+        
+    }
+     //track list
+    removeTrack = (postId) => {
+        var id = app.auth().currentUser.uid
+        this.postRef.child(id).child('post').child(postId).remove()
+        this.setState({
+            deletedPostOpen: true
+        })
+    }
+       //track list
+removeSong = (postId) => {
+           
+        var id = app.auth().currentUser.uid
+        this.playlistRef.child(id).child('playlist').child(postId).remove()
+        this.setState({
+            deletedPostOpen: true
+        })
+}
+
+
+
+    handleChange = (e) => {
+
+        if(e.target.value === null){
+            this.setState({
+                sorted: false
+            })
+        }
+        
+        if(e.target.value === 'Album'){
+            this.setState({
+                sorted: true
+            })
+
+        var sortedAlbums =  this.state.tracks.sort((a,b)=>{
+                if(a.album > b.album){
+                    return 1
+                } else {
+                    return -1
+                }
+            })
+            this.setState({
+                sortedAlbums: sortedAlbums
+            })
+            this.setState({
+                sortAlbums: true
+            })
+        }
+        if(e.target.value === 'Title'){
+            this.setState({
+                sorted: true
+            })
+            var sortedTitles =  this.state.tracks.sort((a,b)=>{
+                if(a.title > b.title){
+                    return 1
+                } else {
+                    return -1
+                }
+            })
+            this.setState({
+                sortedTitles: sortedTitles
+            })
+            this.setState({
+                sortTitle: true
+            })
+        }
+        if(e.target.value === 'Album' && this.state.sortTitle === true){
+            this.setState({
+                sorted: true
+            })
+            var sortedAlbums =  this.state.tracks.sort((a,b)=>{
+                if(a.album > b.album){
+                    return 1
+                } else {
+                    return -1
+                }
+            })
+            this.setState({
+                sortedAlbums: sortedAlbums
+            })
+            
+            this.setState({
+                sortAlbums: true
+            })
+            this.setState({
+                sortTitle: false
+            })
+        }
+        if(e.target.value === 'Title' && this.state.sortAlbums === true){
+            this.setState({
+                sorted: true
+            })
+            var sortedTitles =  this.state.tracks.sort((a,b)=>{
+                if(a.title > b.title){
+                    return 1
+                } else {
+                    return -1
+                }
+            })
+            this.setState({
+                sortedTitles: sortedTitles
+            })
+            this.setState({
+                sortTitle: true
+            })
+            this.setState({
+                sortAlbums: false
+            })
+        }
+    }
+
+    handlePlaylistChange = (e) => {
+
+        if(e.target.value === null){
+            this.setState({
+                sortedPlaylist: false
+            })
+        }
+        
+        if(e.target.value === 'Album'){
+            this.setState({
+                sortedPlaylist: true
+            })
+
+        var sortedAlbumsPlaylist =  this.state.playlist.sort((a,b)=>{
+                if(a.album > b.album){
+                    return 1
+                } else {
+                    return -1
+                }
+            })
+            this.setState({
+                sortedAlbumsPlaylist: sortedAlbumsPlaylist
+            })
+            this.setState({
+                sortAlbumsPlaylist: true
+            })
+        }
+        if(e.target.value === 'Title'){
+            this.setState({
+                sortedPlaylist: true
+            })
+            var sortedTitlesPlaylist =  this.state.playlist.sort((a,b)=>{
+                if(a.title > b.title){
+                    return 1
+                } else {
+                    return -1
+                }
+            })
+            this.setState({
+                sortedTitlesPlaylist: sortedTitlesPlaylist
+            })
+            this.setState({
+                sortTitlePlaylist: true
+            })
+        }
+        if(e.target.value === 'Album' && this.state.sortTitlePlaylist === true){
+            this.setState({
+                sortedPlaylist: true
+            })
+            var sortedAlbumsPlaylist =  this.state.playlist.sort((a,b)=>{
+                if(a.album > b.album){
+                    return 1
+                } else {
+                    return -1
+                }
+            })
+            this.setState({
+                sortedAlbumsPlaylist: sortedAlbumsPlaylist
+            })
+            
+            this.setState({
+                sortAlbumsPlaylist: true
+            })
+            this.setState({
+                sortTitlePlaylist: false
+            })
+        }
+        if(e.target.value === 'Title' && this.state.sortAlbumsPlaylist === true){
+            this.setState({
+                sortedPlaylist: true
+            })
+            var sortedTitlesPlaylist =  this.state.playlist.sort((a,b)=>{
+                if(a.title > b.title){
+                    return 1
+                } else {
+                    return -1
+                }
+            })
+            this.setState({
+                sortedTitlesPlaylist: sortedTitlesPlaylist
+            })
+            this.setState({
+                sortTitlePlaylist: true
+            })
+            this.setState({
+                sortAlbumsPlaylist: false
+            })
+        }
+    }
+
+    handleTabsChange = (event, newValue) => {
+        this.setState({
+            value: newValue
+        })
+
+     };
+
+    handleUserInput(e){
+        if(e.target.name === 'photo' && e.target.files[0]){
+            this.setState({
+                imageUri: e.target.files[0]
+            })
+            
+            
+        
+            const uploadTask = app.storage().ref(`photo post/${this.state.imageUri.name}`).put(this.state.imageUri);
+            uploadTask.on('state_changed', 
+                (error)=>{
+                   //error
+                   console.log(error)
+                    
+                }, (snapshot)=>{
+                   
+                    this.setState({
+                        imageProgress: Math.round(snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                    })
+                    
+                },(()=>{
+                    app.storage().ref('photo post').child(this.state.imageUri.name).getDownloadURL()
+                    .then(url =>{
+                        this.setState({
+                            imageUrl: url
+                        })
+                 })
+              })
+            )
+        }
+        if(e.target.name === 'video' && e.target.files[0]){
+            this.setState({
+                videoUri: e.target.files[0]
+            })
+            
+        
+            const uploadTask = app.storage().ref(`video post/${this.state.videoUri.name}`).put(this.state.videoUri);
+            uploadTask.on('state_changed', 
+                (snapshot)=>{
+                    this.setState({
+                        videoProgress: Math.round(snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                    })
+                    
+                }, (error)=>{
+                    //error
+                    console.log(error)
+                },(()=>{
+                    app.storage().ref('video post').child(this.state.videoUri.name).getDownloadURL()
+                    .then(url =>{
+                        this.setState({
+                            videoUrl: url
+                        })
+                 })
+              })
+            )
+        }
+        if(e.target.name === 'audio' && e.target.files[0]){
+            this.setState({
+                audioUri:  e.target.files[0]
+            })
+           
+            const uploadTask = app.storage().ref(`tracks/${this.state.audioUri.name}`).put(this.state.audioUri);
+            uploadTask.on('state_changed', 
+                (error)=>{
+                  
+                   
+                     //error
+                     console.log(error)
+
+
+                }, (snapshot)=>{
+
+                    
+                    this.setState({
+                        audioProgress:   Math.round(snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                    })
+                    
+
+                },(()=>{
+                    app.storage().ref('tracks').child(this.state.audioUri.name).getDownloadURL()
+                    .then(url =>{
+                        this.setState({
+                            audioUrl: url
+                        })
+                 })
+              })
+            )
+        }
+        if(e.target.name === 'coverArt' && e.target.files[0]){
+            this.setState({
+                coverArtUri: e.target.files[0]
+            })
+           
+            const uploadTask = app.storage().ref(`cover art/${this.state.coverArtUri.name}`).put(this.state.coverArtUri);
+            uploadTask.on('state_changed', 
+                (error)=>{
+
+                    //error
+                    console.log(error)
+                   
+                }, (snapshot)=>{
+                    
+                    this.setState({
+                        imageProgress: Math.round(snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                    })
+                    
+                },(()=>{
+                    app.storage().ref('photo post').child(this.state.coverArtUri.name).getDownloadURL()
+                    .then(url =>{
+                        this.setState({
+                            coverArt: url
+                        })
+                 })
+              })
+            )
+        }
+        if(e.target.name === 'text'){
+            this.setState({
+                text: e.target.value
+            })
+        }
+        if(e.target.name === 'description'){
+            this.setState({
+                description: e.target.value
+            })
+        }
+        if(e.target.name === 'artist'){
+            this.setState({
+                artist: e.target.value
+            })
+        }
+        if(e.target.name === 'title'){
+            this.setState({
+                title: e.target.value
+            })
+            
+        }
+        if(e.target.name === 'album'){
+            this.setState({
+                album: e.target.value
+            })
+        }
+        if(e.target.name === 'mixtape'){
+            this.setState({
+                mixtape: e.target.value
+            })
+        }
+        
+       
+      };
+
+
+
+//open add post 
+    handleClick(){
+        this.setState({
+            open: true
+        })
+      }
+//close add post
+    handleClose(){
+        this.setState({
+            
+            open: false,
+            deletedPostOpen: false,
+            trackDeleted: false
+       
+        })
+    }
+//get userprofile audio post
+ getUserAudioPost(id){
+    const previousTracks = this.state.tracks
+
+    this.postRef.child(id).child('post').on('child_added', snap=>{
+        if(snap.val().audio){
+            previousTracks.push({
+                id: snap.key,
+                userId: snap.val().userId,
+                title: snap.val().title,
+                album: snap.val().album,
+                mixtape: snap.val().mixtape,
+                artist: snap.val().artist,
+                coverArt: snap.val().coverArt,
+                audio: snap.val().audio
+            })
+            this.setState({
+                tracks: previousTracks
+            })
+        }
+      
+    })
+
+
+    this.postRef.child(id).child('post').on('child_removed', snap=>{
+        for(var i=0; i < previousTracks.length; i++){
+            if(previousTracks[i].id === snap.key){
+              previousTracks.splice(i, 1);
+            }
+          }
+    
+          this.setState({
+            tracks: previousTracks
+          })
+    })
+    
+ }
+
+ //get playlist post
+ getUserPlaylist(id){
+    const previousPlaylist = this.state.playlist
+
+    this.playlistRef.child(id).child('playlist').on('child_added', snap=>{
+        if(snap.val().audio){
+            previousPlaylist.push({
+                id: snap.key,
+                userId: snap.val().userId,
+                title: snap.val().title,
+                album: snap.val().album,
+                mixtape: snap.val().mixtape,
+                artist: snap.val().artist,
+                coverArt: snap.val().coverArt,
+                audio: snap.val().audio
+            })
+            this.setState({
+                playlist: previousPlaylist
+            })
+        }
+      
+    })
+
+
+    this.playlistRef.child(id).child('playlist').on('child_removed', snap=>{
+        for(var i=0; i < previousPlaylist.length; i++){
+            if(previousPlaylist[i].id === snap.key){
+              previousPlaylist.splice(i, 1);
+            }
+          }
+    
+          this.setState({
+            playlist: previousPlaylist
+          })
+    })
+    
+ }
+
+ checkRankStatus(city, id){
+    //this.cityRef.child(this.state.city)
+    this.cityRef.child(city).on('value', snap => {
+        var values = snap.val() || {};
+        const userIds = Object.keys(values);
+       
+        const promises = userIds.map(
+          uid => app.database().ref(`/Users/${uid}`).once('value')
+        );
+        
+        Promise.all(promises).then(results => {
+          results.forEach(result => {
+            values = result.val();
+    
+            
+          this.state.cityList.push(values)
+          
+          });
+          function sortRatings(a,b){
+              let result = 0
+    
+              let dataA = a.rating
+              let dataB = b.rating
+    
+              dataA > dataB ? result = 1 : result = -1
+              return result
+          }
+         
+         var finalList = this.state.cityList.sort(sortRatings).reverse().slice(0, 4).map((i)=>{ return i})
+         this.setState({
+             finalCityList: finalList
+         })
+         
+         
+          //get index
+         var userRank = this.getIndex(id)
+         this.setState({
+             userRank: userRank
+         })
+        });
+         
+      })
+ }
+
+ getIndex(id){
+     var index = this.state.finalCityList.findIndex(x => x.userId === id ) 
+     
+     switch(index) {
+        case 0:
+          return <p>#1</p>
+          break;
+        case 1:
+            return <p>#2</p>
+          break;
+          case 2:
+            return <p>#3</p>
+          break;
+          case 3:
+            return <p>#4</p>
+          break;
+          case 4:
+            return <p>#5</p>
+          break;
+          case 5:
+            return <p>#6</p>
+          break;
+          case 6:
+            return <p>#7</p>
+          break;
+          case 7:
+            return <p>#8</p>
+          break;
+          case 8:
+            return <p>#9</p>
+          break;
+          case 9:
+            return <p>#10</p>
+          break;
+        default:
+         return null
+      }
+ }
+ 
+      componentWillMount(){
+        
+
+        app.auth().onAuthStateChanged((user)=>{
+            if(user){
+
+            this.setState({
+                currentUserId: user.uid
+            })
+            
+            var currentUserId = user.uid
+            
+            this.setState({
+                paramsId: this.props.match.params.id
+            })
+            
+            this.getUserAudioPost(this.state.paramsId)
+            this.getUserPlaylist(this.state.paramsId)
+            
+            this.userRef.child(this.state.paramsId).on('value', snap=>{
+                
+                this.setState({
+                    name: snap.val().userName,
+                    city: snap.val().city,
+                    profileImage: snap.val().profileImage,
+                    label: snap.val().label
+                    //rank later
+                })
+                this.checkRankStatus(snap.val().city, this.state.paramsId)
+                
+            })
+            
+            }else{
+
+            }
+        })                      
+}
+
+
+        
+    
+    render() {
+        
+        return (
+            <div id='userProfile'>
+                <>
+                 <ToastContainer/>
+                </>
+                <Grid 
+                container 
+                spacing={4}
+                >
+              <Grid item  xs={12} md={3}>
+
+                        <div id='user-img'>
+                         {this.state.profileImage ? (<img src={this.state.profileImage}/> ):(<img src={require('../../assets/noimage.png')}/> )} 
+                        </div>
+                    
+
+                        <div id='user-profile-name'>
+                           <div  id='userProfileName'><p>{this.state.name}</p></div> 
+                            <span>{this.state.city}</span>
+                        {this.state.userRank ? (<div id='userProfileRank'> <span>{this.state.userRank}</span></div>):(null)}   
+                        {this.state.paramsId === this.state.currentUserId ? 
+                        ( <Fab onClick={this.handleClick} color="primary" aria-label="add">
+                                <AddIcon />
+                            </Fab>
+                         ):(null)}
+
+                        {this.state.paramsId === this.state.currentUserId ? 
+                        (<div id='editProfileBtn'>
+                        <button onClick={()=>{
+                            this.props.history.push('/edit/'+ this.state.currentUserId)
+                        }}>Edit Profile</button>
+                    </div>)
+                         :
+                         (null)}
+                        
+                           
+                        </div> 
+                        
+                    </Grid>
+                    
+                    <Grid item xs={12}md={8}>
+                        <div id='media-field'>      
+                        {this.state.label === 'Artist' || this.state.label === 'Producer' ?
+                        (<div>
+                             <p>Music Library</p>
+                        
+                        <input onChange={this.handleChange}  type="text" id='sort'  name='type' placeholder="Sort Tracks By:" className="sel1" list="sort-by"/>
+                        <datalist id="sort-by">
+                            <option value="Title"></option>
+                            <option value="Album"></option>
+                        </datalist>
+
+                        <div id='all-tracks'>
+                       
+                        {this.state.sortAlbums ? 
+                        this.state.sortedAlbums.map((track)=>{
+                            return(
+
+
+
+                                <Track
+                                key={track.id}
+                                id={track.id}
+                                userId={track.userId}
+                                title={track.title} 
+                                artist={track.artist}
+                                album={track.album}
+                                coverArt={track.coverArt}
+                                audio={track.audio}
+                                removeTrack={this.removeTrack}
+                                />
+                            )
+
+                        }): null}
+
+
+                        {this.state.sortTitle ? 
+                        this.state.sortedTitles.map((track)=>{
+                            return(
+
+
+
+                                <Track
+                                key={track.id}
+                                id={track.id}
+                                userId={track.userId}
+                                title={track.title} 
+                                artist={track.artist}
+                                album={track.album}
+                                coverArt={track.coverArt}
+                                audio={track.audio}
+                                removeTrack={this.removeTrack}
+                                />
+                            )
+
+                        }): null}
+
+
+                        {!this.state.sorted ? 
+                        this.state.tracks.map((track)=>{
+
+
+
+                            return(
+                                <Track
+                                key={track.id}
+                                id={track.id}
+                                userId={track.userId}
+                                title={track.title} 
+                                artist={track.artist}
+                                album={track.album}
+                                coverArt={track.coverArt}
+                                audio={track.audio}
+                                removeTrack={this.removeTrack}
+                                />
+                            )
+
+                        }): null}         
+                      </div>
+                        </div>)
+                        :
+                        (null)}
+                       
+
+                      <p>Playlist</p>
+
+                      <input onChange={this.handlePlaylistChange}  type="text" id='sort'  name='type' placeholder="Sort Playlist By:" className="sel1" list="sort-by"/>
+                        <datalist id="sort-by">
+                            <option value="Title"></option>
+                            <option value="Album"></option>
+                        </datalist>
+
+                      <div id='playList'>
+                        {this.state.sortAlbumsPlaylist ? 
+                        (this.state.sortedAlbumsPlaylist.map((song)=>{
+                            return(
+                                <Track
+                                   key={song.id}
+                                   id={song.id}
+                                   userId={song.userId}
+                                   title={song.title} 
+                                   artist={song.artist}
+                                   album={song.album}
+                                   coverArt={song.coverArt}
+                                   audio={song.audio}
+                                   removeTrack={this.removeSong}
+                                   playlistUserId={this.state.paramsId}
+                                />
+                            )
+
+                        })):
+                        (null)}
+
+                        {this.state.sortTitlePlaylist ? 
+                        (this.state.sortedTitlesPlaylist.map((song)=>{
+                            return(
+                                <Track
+                                   key={song.id}
+                                   id={song.id}
+                                   userId={song.userId}
+                                   title={song.title} 
+                                   artist={song.artist}
+                                   album={song.album}
+                                   coverArt={song.coverArt}
+                                   audio={song.audio}
+                                   removeTrack={this.removeSong}
+                                   playlistUserId={this.state.paramsId}
+                                />
+                            )
+
+                        })):
+                        (null)}
+
+                        {!this.state.sortedPlaylist ? 
+                        (this.state.playlist.map((song)=>{
+                            return(
+                                <Track
+                                   key={song.id}
+                                   id={song.id}
+                                   userId={song.userId}
+                                   title={song.title} 
+                                   artist={song.artist}
+                                   album={song.album}
+                                   coverArt={song.coverArt}
+                                   audio={song.audio}
+                                   removeTrack={this.removeSong}
+                                   playlistUserId={this.state.paramsId}
+                                />
+                            )
+
+                        })):
+                        (null)}
+
+                      </div>
+
+
+                      <UserProfileTabs/>
+
+
+
+
+                     </div>
+                    </Grid>
+                </Grid>
+                <Dialog
+                        open={this.state.deletedPostOpen}
+                        onClose={this.handleClose}
+                        aria-labelledby="alert-dialog-title"
+                        aria-describedby="alert-dialog-description"
+                        >
+             {this.state.valid != false ? (<div><DialogTitle id="alert-dialog-title">{"Deleted Track"}</DialogTitle>
+              <DialogContent>
+               <DialogContentText id="alert-dialog-description">
+                    This track has been permanently removed.
+                </DialogContentText>
+               </DialogContent></div>)
+               :(<div><DialogTitle id="alert-dialog-title">{"Invalid Input."}</DialogTitle>
+               <DialogContent>
+               
+                </DialogContent></div>)}
+              <DialogActions>
+                <Button onClick={this.handleClose} 
+                    color="primary" autoFocus>
+                    Close
+                </Button>
+               </DialogActions>
+            </Dialog>
+
+
+
+
+            <Dialog
+        open={this.state.open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={this.handleClose}
+        aria-labelledby="alert-dialog-slide-title"
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle id="alert-dialog-slide-title">{"Create a Post"}</DialogTitle>
+        <DialogContent>
+        
+        <Tabs value={this.state.value} onChange={this.handleTabsChange} aria-label="simple tabs example">
+
+          <Tab label="Text"/>
+          <Tab label="Photo/Video"/>
+          <Tab label="Audio"  />
+
+        </Tabs>
+
+      <TabPanel value={this.state.value} index={0}>
+
+      <div>
+        <TextField  value={this.state.text} onChange={this.handleUserInput} id="standard-textarea" label="Speak your mind..." name='text' inputProps={{maxLength: 255,}} multiline/>
+      </div>
+
+
+      </TabPanel>
+      <TabPanel value={this.state.value} index={1}>
+      <div id='uploadPV'>
+            <div id='photo'>
+                {this.state.imageUrl ? (<img src={this.state.imageUrl} alt='upload'/>):(null)}
+            </div>
+            <div id='file'>
+        <input type="file" name='photo' accept="image/*" onChange={this.handleUserInput}/>
+            <progress value={this.state.imageProgress}  max='100'></progress>
+            </div>
+            {this.state.imageProgress === 100 ? (<p>Picture loaded</p>): (<p>No Picture loaded</p>)}
+            or
+            <div id='file'>
+              <input type="file" name='video' accept="video/*" onChange={this.handleUserInput}/>
+            <progress value={this.state.videoProgress}  max='100'></progress>
+            </div>
+            {this.state.videoProgress === 100 ? (<p>Video loaded</p>): (<p>No Video loaded</p>)}
+            <div>
+                <TextField onChange={this.handleUserInput} id="standard-textarea" label="Description" value={this.state.description} name='description'inputProps={{maxLength: 255,}} multiline/>
+            </div>
+        </div>
+      </TabPanel>
+
+
+{this.state.label === 'Artist' || this.state.label === 'Producer' ?
+(<div>
+    <TabPanel value={this.state.value} index={2}>
+        <div>
+        <p>Choose Audio File</p>
+            <div id='file'>
+            <input type="file"  name='audio' accept="audio/*" onChange={this.handleUserInput}/>
+            <progress value={this.state.audioProgress}  max='100'></progress>
+            </div>
+               {this.state.audioProgress === 100 ? (<p>Track loaded</p>): (<p>No track loaded</p>)}
+            <div id='uploadCoverArt'>
+                {this.state.coverArt ? (<img src={this.state.coverArt} alt='upload'/>):(<img src={require('../../assets/noimage.png')} alt='upload'/>)}
+            </div>
+            <p>Cover Art</p>
+            <div id='file'>
+                
+            <input type="file"  name='coverArt' accept="image/*" onChange={this.handleUserInput}/>
+            <progress value={this.state.imageProgress}  max='100'></progress>
+            </div>
+            {this.state.imageProgress === 100 ? (<p>Cover Art loaded</p>): (<p>No Cover Art loaded</p>)}
+            <div>
+            <TextField id="standard-basic" onChange={this.handleUserInput} inputProps={{ maxLength: 17, }} value={this.state.artist} name='artist' label="Artist" />
+            </div>
+            <div>
+            <TextField id="standard-basic" onChange={this.handleUserInput} inputProps={{ maxLength: 17, }} value={this.state.title} name='title' label="Song Title" />
+            </div>
+            <div>
+            <TextField id="standard-basic" onChange={this.handleUserInput} inputProps={{ maxLength: 25, }} value={this.state.album} name='album' label="Song Album" />
+            </div>
+            <div>
+            <TextField id="standard-basic" onChange={this.handleUserInput} inputProps={{ maxLength: 25, }} value={this.state.mixtape} name='mixtape' label="Song Mixtape" />
+            </div>
+             <div>
+                <TextField id="standard-textarea" onChange={this.handleUserInput} inputProps={{ maxLength: 255, }} value={this.state.description} label="Description" name='description' multiline />
+            </div>
+        </div>
+      </TabPanel>
+</div>)
+:
+(<TabPanel value={this.state.value} index={2}>
+    <p>Only [Artist] or [Producer] accounts can upload music,
+     your account is registered as a [Default User]. However if in the future you wish to change
+     your label, beware to only upload music you own or have the legal rights to. Otherwise your account
+      will be permentaly deleted.</p>
+</TabPanel>)
+}
+      
+
+
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={this.handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={this.addPost} color="primary">
+            Post
+          </Button>
+        </DialogActions>
+      </Dialog>
+            </div>
+        )
+    }
+
+
+}

@@ -1,0 +1,225 @@
+#track-container{
+    background-color: rgb(255, 255, 255);
+    margin: 5px;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+   
+    
+}
+
+#track-controls{
+   
+ 
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+   
+    
+}
+#track-cover-art {
+   
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+#track-cover-art img{
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+}
+#track-info{
+    text-align: left;
+    background-color: rgb(255, 255, 255);
+    padding: 5px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    margin-right: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    
+}
+
+#track-info:hover {
+    cursor: pointer;
+    }
+#time-seekbar{
+    font-size: 17px;
+    font-family: 'Baloo Bhaina 2';
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    width: 300px;
+    
+}
+
+
+
+#addToLibrary{
+    margin-top: 10px;
+   margin-left: 10px;
+}
+    
+
+#addToLibrary:hover{
+cursor: pointer;
+color: turquoise;
+}
+
+
+#addToLibrary:hover #tooltiptextAdd{
+    visibility: visible;
+}
+
+
+
+#tooltiptextAdd {
+    position: relative;
+
+    visibility: hidden;
+    width: 80px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    font-size: 15px;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+
+#info-artist{
+    font-size: 20px;
+    font-family: 'Baloo Bhaina 2';
+    
+    
+    
+}
+#info-title{
+    font-size: 15px;
+    font-family: 'Baloo Bhaina 2';
+    
+   
+}
+#info-album{
+    font-size: 15px;
+    font-family: 'Baloo Bhaina 2';
+    
+    
+}
+#close:hover{
+    cursor: pointer;
+   
+    
+}
+#close:hover  #tooltiptext{
+
+    visibility: visible;
+    
+}
+
+#tooltiptext {
+    position: relative;
+
+    visibility: hidden;
+    width: 50px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    font-size: 10px;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+
+#close img{
+
+    width: 15px;
+    height: 15px;
+    margin: 10px;
+}
+
+#play-icon img{
+    width: 25%;
+
+}
+
+.root{
+    display: 'flex'
+}
+
+.details{
+    display: 'flex';
+    flex-direction: 'column'
+}
+
+.content{
+    flex: '1 0 auto'
+}
+
+.cover{
+    width: 151px
+}
+
+.controls{
+    display: 'flex';
+    align-items:  'center';
+    
+}
+
+.playIcon{
+    height: 38px;
+    width: 38px;
+}
+
+
+#seek-bar{
+    
+   width: 100%;
+    height: 5px;
+    background-color:gray;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    
+}
+#fill{
+   display: flex;
+ 
+    height: 5px;
+    background-color:royalblue;
+    border-radius: 20px;
+}
+#handle{
+    width: 8px;
+    height: 8px;
+    background-color:royalblue;
+    border-radius: 50%;
+    margin-left: -5px;
+    transform: scale(2);
+}
+
+#playlistDelete{
+    width: 15px;
+    height: 15px;
+}
+
+#trackRating{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+}

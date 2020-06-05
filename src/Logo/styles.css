@@ -1,0 +1,17 @@
+.logo{
+    position: relative;
+    text-align: center;
+    background-image: url(../assets/login.JPG);
+    padding: 200px 0 200px 0;
+   
+
+
+}
+
+.logo a{
+    font-family:  'Dancing Script', cursive;
+    font-size: 40px;
+    text-align: center;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}

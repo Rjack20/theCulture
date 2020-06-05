@@ -1,0 +1,58 @@
+#upload_container{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: 50px 0 0 50px;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    
+   
+
+}
+.trackContainer{
+    width: 70%;
+    float: right;
+    
+}
+
+#loadedTracks{
+    text-align: center;
+    margin-top: 55px;
+    
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+#signedInStatus{
+    text-align: center;
+
+}
+
+
+
+
+#cover_img{
+    width: 100px;
+    height: 100px;
+
+}
+
+#upload_button{
+    margin-top: 20px;
+
+}
+
+#submit{
+   margin: 0 0 50px 5px;
+}
+h5{
+    align-self: start;
+    font-size: 18px;
+   
+}
+
+
+progress{
+    align-self: start;
+    margin-top: 20px;
+}

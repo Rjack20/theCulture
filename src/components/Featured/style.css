@@ -1,0 +1,117 @@
+
+#feature-container{
+    width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+#featuredContainer {
+    
+    text-transform: uppercase;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    box-sizing: border-box;
+    letter-spacing: 2px;
+    margin-top: 5px;
+   
+    
+}
+
+#featureImage img{
+    width: 100%;
+    height: auto;
+   
+}
+
+/*title*/
+#featuredContainer  h1{
+    
+    text-transform: uppercase;
+    font-size: 120%;
+    text-align: center;
+    padding: 10px 0;
+    margin: 0px 10px 0px 10px;
+    box-sizing: border-box;
+    letter-spacing: 2px;
+    width: 80%;
+    text-align: center;
+   
+    
+}
+
+/*time*/
+#featuredContainer  span{
+    
+    text-transform: uppercase;
+    font-size: 55%;
+    text-align: center;
+    padding: 10px 0;
+    box-sizing: border-box;
+    letter-spacing: 2px;
+    font-family: 'Baloo Bhaina 2';
+   
+    
+}
+/*sub title*/
+#featureSub p{
+    text-transform: uppercase;
+    font-size: 60%;
+    text-align: center;
+    box-sizing: border-box;
+    letter-spacing: 2px;
+ 
+}
+
+.feature-{
+    width: 36.85%;
+    margin-left: 10px;
+}
+
+
+
+#feature-close-btn img{
+    display: block;
+    position: relative;
+    padding: 5px;
+    width: 15px;
+    
+    
+    
+}
+
+.contact-body{
+    font-size: 12px;
+    color: rgb(93, 93, 93);
+    font-weight: 400;
+}
+
+.recentPost h3{
+    font-weight: 500;
+    color: #6c6c6c;
+    letter-spacing: 1px;
+    font-size: 14px;
+
+}
+.recentPosts{
+    padding: 20px 0;
+}
+
+.recentPost{
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+}
+
+.recentPost span{
+    font-size: 10px;
+    font-weight: 400;
+    color: #6c6c6c;
+
+}
+
+#feature-link{
+    color: black;
+    text-decoration: none;
+}

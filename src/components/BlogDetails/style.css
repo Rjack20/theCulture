@@ -1,0 +1,90 @@
+#blogDetailsContainer{
+
+    display: flex;
+    flex-direction: column;
+}
+#blogDetailsCard{
+    background-color: white;
+    width: 62%;
+    position: relative;
+    text-align: center;
+}
+#blogBodyContainer{
+    background-color: white;
+    width: 56%;
+    position: relative;
+    text-align: center;
+    padding: 15px;
+   
+}
+#blogBody{
+    
+}
+#blogDetailsImgCntainer{
+    width: 100%;
+    
+}
+#blogDetailsImgCntainer img{
+     max-width: 100%;
+    
+    object-fit: cover;
+   
+    
+    
+}
+#detailsTitle{
+    position: absolute;
+    width: 100%;
+    font-size: 3vw;  
+    left: 40%;                    
+    top: 68%;                         
+    transform: translate(-50%, -50%); 
+    color: white;
+}
+#detailsArtist{
+    position: absolute;
+    width: 100%;
+    font-size: 3vw;  
+    left: 13%;                    
+    top: 48%;                         
+    transform: translate(-50%, -50%); 
+    color: white;
+}
+#detailsCity{
+    position: absolute;
+    width: 100%;
+    font-size: 3vw;  
+    left: 14.9%;                    
+    top: 58%;                         
+    transform: translate(-50%, -50%); 
+    color: white;
+}
+#detailsRank{
+    position: absolute;
+    width: 100%;
+    font-size: 3vw;  
+    left: 13%;                    
+    top: 68%;                         
+    transform: translate(-50%, -50%); 
+    color: white;
+}
+
+#detailsTime{
+    position: absolute; 
+    font-size: 1.5vw;
+    left: 13.5%;                        /* horizontal alignment */
+    top: 82%;                         /* vertical alignment */
+    transform: translate(-50%, -50%); /* precise centering; see link below */
+    color: white;
+}
+
+#detailsAuthor{
+    position: absolute; 
+    font-size: 1.5vw;
+    left: 12%;                        /* horizontal alignment */
+    top: 88%;                         /* vertical alignment */
+    transform: translate(-50%, -50%); /* precise centering; see link below */
+    color: white;
+}
+
+

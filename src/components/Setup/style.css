@@ -1,0 +1,37 @@
+#setup{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 800px;
+    padding-bottom: 100px;
+    
+}
+#setup img{
+   width: 185px;
+    
+}
+#input{
+  width:  240px;
+}
+
+
+#setup p{
+   text-align: center;
+}
+
+#setup img{
+    border-radius: 50%;
+}
+
+#image{
+   margin: 15px;
+}
+#edit:hover{
+   cursor: pointer;
+}
+
+#done{
+    margin: 30px;
+}

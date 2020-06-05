@@ -1,0 +1,57 @@
+#cityCollection{
+    position: relative;
+    padding-bottom: 25px;
+    width: 50%;
+    margin: auto;
+    
+  
+
+}
+
+#cityRankLink{
+   text-decoration: none;
+  
+
+}
+
+
+#chartImg img{
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+}
+
+#chartUsername span{
+    font-size: 25px;
+    
+}
+
+#rankOneArist p{
+    position: absolute;
+    color: white;
+    padding: 5px;
+    background-color: tomato;
+    top: 1%;
+    margin-left: 15px;
+    transform: translate(-50% -50%);
+    font-size: 2vw;
+}
+
+#rankOneLabel p{
+    position: absolute;
+    color: white;
+    background-color: tomato;
+    padding: 5px;
+    top: 10.5%;
+    margin-left: 15px;
+    transform: translate(-50% -50%);
+    font-size: 2vw;
+}
+
+
+#rankOneRank span{
+   color: rgb(34, 34, 34);
+   font-size: 29px;
+}
+
+

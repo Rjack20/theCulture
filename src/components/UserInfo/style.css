@@ -1,0 +1,47 @@
+#liker{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 305px;
+    margin-bottom: 20px;
+    background-color: rgb(248, 248, 248);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    
+    
+    
+}
+
+#liker img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+#likeUserInfo{
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+}
+
+#likeUserInfo:hover{
+    cursor: pointer;
+}
+
+#likerInfo{
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 0 0;
+}
+#likerInfo p{
+    font-size: 12px;
+    margin: 0 0 0 2px;
+    text-align: start;
+}
+#followStatus{
+margin-right: 5px;
+font-size: 10px;
+}
+#followStatus:hover{
+    cursor: pointer;
+    color: turquoise;
+}

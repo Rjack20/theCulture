@@ -1,0 +1,113 @@
+#userProfile{
+    min-height: 1000px;
+}
+#user-profile-name{
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    padding-bottom: 15px;
+}
+
+
+#user-profile-name span{
+    text-align: center;
+    font-family: 'Baloo Bhaina 2';
+    font-size: 18px;
+    
+}
+
+
+#userProfileName p{
+    font-size: 30px;
+    font-weight: 500;
+}
+#userProfileRank span{
+    font-size: 21px;
+}
+
+#editProfileBtn{
+    margin-top: 15px;
+}
+#editProfileBtn button{
+    width: 85px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+#editProfileBtn{
+    margin-top: 15px;
+}
+#editProfileBtn button:hover{
+    cursor: pointer;
+}
+
+
+
+#user-img{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+
+}
+#user-img img{
+
+width: 50%;
+border-radius: 50%;
+padding:1px;
+border:5px solid #acacac;
+}
+
+#all-tracks{
+    overflow: auto;
+    overflow-x: hidden;
+    max-height: 600px;
+    box-shadow: 0 4px 8px 4px rgba(0,0,0,0.2);
+}
+
+#tabs-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    
+}
+#tabs-row p{
+    white-space: nowrap;
+}
+#tabs-row p:hover{
+    cursor: pointer;
+}
+#tabs-column p{
+    white-space: nowrap;
+}
+#tabs-column p:hover{
+    cursor: pointer;
+}
+#tabs-column{
+    
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    
+   
+}
+#grid-titles{
+    display: flex;
+    flex-direction: row;
+}
+
+#media-field{
+    text-align: center;
+}
+
+
+#sort{
+    margin-bottom: 50px;
+}
+
+
+#playList{
+    overflow: auto;
+    overflow-x: hidden;
+    max-height: 600px;
+    box-shadow: 0 4px 8px 4px rgba(0,0,0,0.2);
+}

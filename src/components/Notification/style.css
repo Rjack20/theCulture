@@ -1,0 +1,14 @@
+#notiImageAndInfo{
+    background-color: salmon;
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    width: 50%;
+    
+}
+
+#notiImageAndInfo img{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
